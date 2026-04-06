@@ -11,4 +11,12 @@ const logout = async () => {
   return res.data;
 };
 
-export default { login, logout };
+const refreshUser = async () => {
+  // use withCredentials: true to send the cookies with your request.
+  const userResponse = await axios.get("/api/auth/me", {
+    withCredentials: true,
+  });
+  return userResponse.data;
+};
+
+export default { login, logout, refreshUser };

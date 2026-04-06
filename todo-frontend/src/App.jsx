@@ -21,6 +21,19 @@ const App = () => {
     fetchTodos();
   }, []);
 
+  useEffect(() => {
+    const refreshUser = async () => {
+      try {
+        const userInfo = await authService.refreshUser();
+        setLoggedUser(userInfo);
+      } catch (error) {
+        setLoggedUser(null);
+      }
+    };
+
+    refreshUser();
+  }, []);
+
   const handleSubmit = async (e) => {
     // prevent page refresh
     e.preventDefault();

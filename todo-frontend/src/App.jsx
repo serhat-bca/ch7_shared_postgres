@@ -48,7 +48,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Todo App</h1>
+      <h1>Todo App.</h1>
       {loggedUser && (
         <>
           <span>Howdy, {loggedUser.username}!</span>

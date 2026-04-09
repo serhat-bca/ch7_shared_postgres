@@ -6,4 +6,11 @@ const getTodos = async () => {
   return response.data;
 };
 
-export default { getTodos };
+const createTodo = async (todo) => {
+  const response = await axios.post(TODO_API, todo, {
+    withCredentials: true,
+  });
+  return response.data;
+};
+
+export default { getTodos, createTodo };

@@ -9,6 +9,8 @@ const App = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [todoInput, setTodoInput] = useState("");
+
   const [loggedUser, setLoggedUser] = useState(null);
 
   useEffect(() => {
@@ -26,7 +28,7 @@ const App = () => {
       try {
         const userInfo = await authService.refreshUser();
         setLoggedUser(userInfo);
-      } catch (error) {
+      } catch {
         setLoggedUser(null);
       }
     };
@@ -42,7 +44,7 @@ const App = () => {
       const result = await authService.login({ username, password });
       console.log("Login Response: ", result);
       setLoggedUser({ username: result.username, name: result.name });
-    } catch (error) {
+    } catch {
       console.log("Invalid Credentials");
     }
 
@@ -54,9 +56,20 @@ const App = () => {
     try {
       await authService.logout();
       setLoggedUser(null);
-    } catch (error) {
+    } catch {
       setLoggedUser(null);
     }
+  };
+
+  const handleAddTodo = async (e) => {
+    e.preventDefault();
+    try {
+      const addedTodo = await todoService.createTodo({ task: todoInput });
+      setTodos([...todos, addedTodo]);
+    } catch {
+      console.log("Error creating todo.");
+    }
+    setTodoInput("");
   };
 
   return (
@@ -85,6 +98,17 @@ const App = () => {
           />
           <br />
           <button type="submit">Login</button>
+        </form>
+      )}
+
+      {loggedUser && (
+        <form onSubmit={handleAddTodo}>
+          <br />
+          <input
+            value={todoInput}
+            onChange={(e) => setTodoInput(e.target.value)}
+          />
+          <button type="submit">Add Todo</button>
         </form>
       )}
 

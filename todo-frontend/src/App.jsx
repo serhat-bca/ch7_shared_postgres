@@ -2,6 +2,7 @@ import TodoList from "./components/TodoList";
 import { useState, useEffect } from "react";
 import todoService from "./services/todos";
 import authService from "./services/auth";
+import Section from "./components/Section";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -112,7 +113,12 @@ const App = () => {
         </form>
       )}
 
-      <TodoList todos={todos} />
+      <Section componentTitle="Todo List Section">
+        <TodoList todos={todos} />
+      </Section>
+      <Section componentTitle="Happy Section">
+        <p>I am the child</p>
+      </Section>
     </div>
   );
 };

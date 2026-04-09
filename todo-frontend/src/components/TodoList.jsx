@@ -2,8 +2,7 @@ import Todo from "./Todo";
 
 const TodoList = ({ todos }) => {
   return (
-    <div>
-      <h3>Todo List</h3>
+    <div >
       <ul>
         {todos.map((t) => (
           <li key={t.id}>
